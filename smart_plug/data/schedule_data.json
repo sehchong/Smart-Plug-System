@@ -1,0 +1,56 @@
+[
+    {
+        "plug_index": 0,
+        "time": "13:26",
+        "days": [
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+        ],
+        "delay": "5",
+        "action": "on",
+        "id": "6115f782-5cf0-4675-9269-db5e3badba1b"
+    },
+    {
+        "plug_index": 0,
+        "time": "13:28",
+        "days": [
+            "Tuesday"
+        ],
+        "delay": "0",
+        "action": "on",
+        "id": "71a1852b-4987-4195-bb84-e1c2f2b57dc0"
+    },
+    {
+        "plug_index": 0,
+        "time": "11:06",
+        "days": [
+            "Wednesday"
+        ],
+        "delay": "3",
+        "action": "on",
+        "id": "e9cd45d1-f345-4739-829c-8d94541ea7ea"
+    },
+    {
+        "plug_index": 1,
+        "time": "14:08",
+        "days": [
+            "Tuesday"
+        ],
+        "delay": "0",
+        "action": "on",
+        "id": "66caa858-27f5-433c-ac67-4d0ffb2c7780"
+    },
+    {
+        "plug_index": 0,
+        "time": "13:20",
+        "days": [
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+        ],
+        "delay": "5",
+        "action": "on",
+        "id": "d2ff2bb8-09eb-404a-a48d-678a88cfde5c"
+    }
+]

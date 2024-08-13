@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart Plug Control</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #333, #555);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.5s;
+            margin: 0; /* Remove default margin */
+        }
+        .container {
+            max-width: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%; /* Full height */
+            width: 100%; /* Full width */
+        }
+        .login-card {
+            width: 400px; /* Increased width */
+            padding: 40px; /* Increased padding */
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+            background-color: #222;
+            color: white;
+            text-align: center; /* Center text */
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Column layout */
+            align-items: center; /* Center items horizontally */
+            position: relative; /* For absolute positioning of toggle */
+        }
+        .btn-primary {
+            background-color: #FF3D00; /* Orange for dark theme */
+            border: none;
+            border-radius: 50px;
+            padding: 15px 30px; /* Increased button padding */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        .btn-primary:hover {
+            background-color: #FF9100; /* Hover effect for dark theme */
+        }
+        .light-theme .btn-primary {
+            background-color: #4CAF50; /* Green for light theme */
+        }
+        .light-theme .btn-primary:hover {
+            background-color: #66BB6A; /* Lighter green for hover */
+        }
+        .logo {
+            width: 150px; /* Increased logo size */
+            margin-bottom: 30px;
+        }
+        .theme-toggle {
+            position: absolute; /* Positioning the toggle absolutely */
+            top: 20px; /* Distance from the top */
+            right: 20px; /* Distance from the right */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .toggle-label {
+            width: 25px;
+            height: 50px;
+            background-color: #FF3D00; /* Dark mode */
+            border-radius: 25px; /* Rounded for vertical */
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+            position: relative;
+        }
+        .toggle-label::after {
+            content: '';
+            width: 25px; /* Knob size */
+            height: 25px; /* Knob size */
+            background-color: white;
+            border-radius: 50%; /* Rounded knob */
+            position: absolute;
+            top: 0; /* Start position (top) */
+            left: 0;
+            transition: transform 0.3s;
+        }
+        .theme-toggle input:checked + .toggle-label {
+            background-color: #4CAF50; /* Light mode */
+        }
+        .theme-toggle input:checked + .toggle-label::after {
+            transform: translateY(25px); /* Move knob down to the bottom */
+        }
+        .toggle-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5px;
+            font-size: 12px; /* Smaller font size for labels */
+            color: white; /* Label color */
+        }
+        .form-group {
+            width: 100%; /* Full width for form elements */
+        }
+        .form-control {
+            width: 250px; /* Adjusted width to match form-group width */
+            margin: 0 auto; /* Center align */
+            border: 2px solid #ccc; /* Adjust the border width and color */
+            border-radius: 5px; /* Optional: round the corners */
+            padding: 10px; /* Add some padding for better spacing */
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <img id="logo" src="{{ url_for('static', filename='sp_w.png') }}" alt="Smart Plug Logo" class="logo">
+            <h1 class="h4">Smart Plug Login</h1>
+            <form method="POST" action="/login">
+                <div class="form-group my-5">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+                <div class="form-group my-5">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <div class="theme-toggle">
+                <input type="checkbox" id="theme-toggle" style="display: none;">
+                <label for="theme-toggle" class="toggle-label"></label>
+                <div class="toggle-text"></div>
+            </div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-info mt-3">
+                        {% for message in messages %}
+                            {{ message }}<br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const logo = document.getElementById('logo');
+
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                document.body.classList.add('light-theme');
+                document.body.style.background = 'linear-gradient(135deg, #FF3D00, #FF9100, #FFC400, #00BFAE, #00E676, #76FF03, #AEEA00, #FFEA00, #FFD600)';
+                document.querySelector('.login-card').style.backgroundColor = '#fff';
+                document.querySelector('.login-card').style.color = '#333';
+                logo.src = "{{ url_for('static', filename='sp_b.png') }}";
+            } else {
+                document.body.classList.remove('light-theme');
+                document.body.style.background = 'linear-gradient(135deg, #333, #555)';
+                document.querySelector('.login-card').style.backgroundColor = '#222';
+                document.querySelector('.login-card').style.color = '#fff';
+                logo.src = "{{ url_for('static', filename='sp_w.png') }}";
+            }
+        });
+    </script>
+</body>
+</html>
