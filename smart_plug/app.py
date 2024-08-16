@@ -14,12 +14,11 @@ app = Flask(__name__)
 app.secret_key = "your_secret_key"
 
 PLUGS = [
-    {"ip": "192.168.0.208", "name": "Plug 1", "rtsp_url": 'rtsp://admin:FBGDIN@192.168.0.218:554/H.264'},
-    {"ip": "192.168.0.203", "name": "Plug 2", "rtsp_url": 'rtsp://admin:JMYZYQ@192.168.0.204:554/H.264'},
+    # {"ip": "ip_number", "name": "Plug 1", "rtsp_url": 'url for rstp'}
 ]
 
-EMAIL = "laikaichong88729@gmail.com"
-PASSWORD = "maco_88729"
+EMAIL = "test@gmail.com"
+PASSWORD = "123456"
 
 plugs = []
 
